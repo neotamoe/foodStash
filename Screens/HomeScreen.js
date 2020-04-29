@@ -18,19 +18,17 @@ const HomeScreen = ({ navigation }) => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <View style={styles.body}>
           <View style={styles.sectionContainer}>
-              <Button 
-                title="View Inventory"
-                onPress={() => navigation.navigate('View Inventory')}  
-              />
-            </View>
-            <View style={styles.sectionContainer}>
-              <Button 
-                title="Add Item"
-                onPress={() => navigation.navigate('Add Item')}  
-              />
-            </View>
+            <Button 
+              title="View Inventory"
+              onPress={() => navigation.navigate('View Inventory')}  
+            />
+          </View>
+          <View style={styles.sectionContainer}>
+            <Button 
+              title="Add Item"
+              onPress={() => navigation.navigate('Add Item')}  
+            />
           </View>
         </ScrollView>
       </SafeAreaView>
