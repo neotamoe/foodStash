@@ -43,4 +43,10 @@ export const styles = StyleSheet.create({
     paddingRight: 12,
     textAlign: 'right',
   },
+  basicInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10
+  }
 });
