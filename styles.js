@@ -40,5 +40,9 @@ export const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 10
+  },
+  formText: {
+    marginBottom: 5,
+    marginTop: 10
   }
 });
