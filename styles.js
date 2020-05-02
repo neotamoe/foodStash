@@ -44,5 +44,10 @@ export const styles = StyleSheet.create({
   formText: {
     marginBottom: 5,
     marginTop: 10
+  },
+  errorText: {
+    color: 'red',
+    fontWeight: 'bold',
+    marginBottom: 10
   }
 });
