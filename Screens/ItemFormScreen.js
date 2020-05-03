@@ -34,7 +34,7 @@ const ItemFormScreen = () => {
 
   const storeData = async () => {
     const item = {
-      item: itemName,
+      name: itemName,
       expiration: expirationDate,
       quantity: quantity
     }

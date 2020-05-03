@@ -1,6 +1,7 @@
-import { Text } from 'react-native';
+import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import { styles } from '../styles'
 
 const InventoryScreen = () => {
   const [list, setList] = useState([])
@@ -9,13 +10,11 @@ const InventoryScreen = () => {
     try {
       const storedList = await AsyncStorage.getItem('inventory')
       if(storedList !== null) {
-        // value previously stored
         const listObject = JSON.parse(storedList)
         setList(listObject)
         console.log(`inventory list object: ${JSON.stringify(listObject)}`)
       }
     } catch(e) {
-      // error reading value
       console.error(`error getting inventory: ${e}`)
     }
   }
@@ -25,7 +24,19 @@ const InventoryScreen = () => {
   }, []); 
 
   return (
-    <Text>Inventory Screen</Text>
+    <SafeAreaView>
+      <ScrollView style={styles.scrollView}>
+        {
+          list.map((item, index) => (
+            <View key={index}>
+              <Text>{item.name}</Text>
+              <Text>{item.quantity}</Text>
+              <Text>{item.expiration}</Text>
+            </View>
+          ))
+        }
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
