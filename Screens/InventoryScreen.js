@@ -12,7 +12,7 @@ const InventoryScreen = () => {
         // value previously stored
         const listObject = JSON.parse(storedList)
         setList(listObject)
-        console.log(`inventory list object: ${listObject}`)
+        console.log(`inventory list object: ${JSON.stringify(listObject)}`)
       }
     } catch(e) {
       // error reading value

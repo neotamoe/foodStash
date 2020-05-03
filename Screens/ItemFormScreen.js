@@ -41,10 +41,10 @@ const ItemFormScreen = () => {
     try {
       let currentInventory = await AsyncStorage.getItem('inventory')
       if(currentInventory === null) {
-        currentInventory = item
+        currentInventory = [item]
       } else {
         currentInventory = JSON.parse(currentInventory)
-        currentInventory = {...currentInventory, item}
+        currentInventory.push(item)
       }
       await AsyncStorage.setItem('inventory', JSON.stringify(currentInventory))
     } catch (e) {
