@@ -2,6 +2,7 @@ import { SafeAreaView, ScrollView, Text, TextInput, View, Button } from 'react-n
 import React, { useState } from 'react';
 import { styles } from '../styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const ItemFormScreen = () => {
   const [ itemName, setItemName ] = useState()
@@ -20,17 +21,36 @@ const ItemFormScreen = () => {
     if(!checkFormFields()){ 
       setShowError(true) 
     }
-    console.log(`itemName: ${itemName}; expirationDate: ${expirationDate}, quantity: ${quantity}`)
+    storeData()
+    console.log(`saving item => itemName: ${itemName}; expirationDate: ${expirationDate}, quantity: ${quantity}`)
   }
   const showDatepickerUI = () => {
     setShowDatepicker(true);
   };
 
   const checkFormFields = () => {
-    console.log((itemName !== undefined && expirationDate !== undefined && quantity !== undefined))
     return (itemName !== undefined && expirationDate !== undefined && quantity !== undefined)
   }
 
+  const storeData = async () => {
+    const item = {
+      item: itemName,
+      expiration: expirationDate,
+      quantity: quantity
+    }
+    try {
+      let currentInventory = await AsyncStorage.getItem('inventory')
+      if(currentInventory === null) {
+        currentInventory = item
+      } else {
+        currentInventory = JSON.parse(currentInventory)
+        currentInventory = {...currentInventory, item}
+      }
+      await AsyncStorage.setItem('inventory', JSON.stringify(currentInventory))
+    } catch (e) {
+      console.error(`error saving data: ${e}`)
+    }
+  }
 
   return (
     <SafeAreaView>
