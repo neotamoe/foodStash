@@ -1,4 +1,4 @@
-import { SafeAreaView, FlatList, Text, View } from 'react-native';
+import { SafeAreaView, FlatList, Text, View, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { styles } from '../styles'
@@ -34,6 +34,18 @@ const InventoryScreen = () => {
             <Text><Text style={styles.itemName}>{item.name.toUpperCase()}</Text></Text>
             <Text><Text style={styles.bold}>Quantity: </Text><Text>{item.quantity}</Text></Text>
             <Text><Text style={styles.bold}>Expiration: </Text><Text>{new Date(Date.parse(item.expiration)).toDateString()}</Text></Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity 
+                onPress={() => console.log('edit')} 
+                style={[styles.halfButton, styles.yellowButton]}>
+                  <Text style={styles.bold}>EDIT</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => console.log('delete')}
+                style={[styles.halfButton, styles.redButton]}>
+                  <Text style={styles.bold}>DELETE</Text>
+              </TouchableOpacity>
+            </View>
           </View>)}
         keyExtractor={item => item.id}>
       </FlatList>

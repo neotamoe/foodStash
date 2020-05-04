@@ -63,5 +63,23 @@ export const styles = StyleSheet.create({
     color: 'purple',
     fontWeight: 'bold',
     fontSize: 18
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+  },
+  halfButton: {
+    flex: 2,
+    padding: 5,
+    marginTop: 5,
+    marginBottom: 5,
+    alignItems: 'center',
+  },
+  redButton: {
+    backgroundColor: 'tomato',
+    marginLeft: 5,
+  },
+  yellowButton: {
+    backgroundColor: 'gold',
+    marginRight: 5
   }
 });
