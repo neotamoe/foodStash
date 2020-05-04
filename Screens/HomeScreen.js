@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
           <View style={styles.sectionContainer}>
             <Button 
               title="View Inventory"
-              onPress={() => navigation.navigate('View Inventory')}  
+              onPress={() => navigation.navigate('Inventory')}  
             />
           </View>
           <View style={styles.sectionContainer}>

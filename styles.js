@@ -49,5 +49,19 @@ export const styles = StyleSheet.create({
     color: 'red',
     fontWeight: 'bold',
     marginBottom: 10
+  },
+  bold: {
+    fontWeight: 'bold'
+  },
+  inventoryItem: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: 'darkgrey',
+  },
+  itemName: {
+    color: 'purple',
+    fontWeight: 'bold',
+    fontSize: 18
   }
 });

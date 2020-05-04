@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { styles } from '../styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-community/async-storage';
+import 'react-native-get-random-values'
+import { v4 as uuidv4 } from 'uuid';
 
 const ItemFormScreen = () => {
   const [ itemName, setItemName ] = useState()
@@ -34,6 +36,7 @@ const ItemFormScreen = () => {
 
   const storeData = async () => {
     const item = {
+      id: uuidv4(),
       name: itemName,
       expiration: expirationDate,
       quantity: quantity

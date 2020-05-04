@@ -16,7 +16,7 @@ const App = () => {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Food Stash" component={HomeScreen} />
         <Stack.Screen name="Add Item" component={ItemFormScreen} />
-        <Stack.Screen name="View Inventory" component={InventoryScreen} />
+        <Stack.Screen name="Inventory" component={InventoryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
