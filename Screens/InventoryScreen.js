@@ -23,6 +23,20 @@ const InventoryScreen = () => {
     getData()
   }, []); 
 
+  const deleteItem = async (id) => {
+    try {
+      const storedList = await AsyncStorage.getItem('inventory')
+      const listObject = JSON.parse(storedList)
+      console.log(`inventory list object: ${JSON.stringify(listObject)}`)
+      const remainingItems = listObject.filter((item) => item.id !== id)
+      console.log(remainingItems)
+      await AsyncStorage.setItem('inventory', JSON.stringify(remainingItems))
+      setList(remainingItems)
+    } catch(e) {
+      console.error(`error getting inventory: ${e}`)
+    }
+  }
+
   return (
     <SafeAreaView>
       { list.length === 0 ? <View style={styles.scrollView}><Text style={styles.sectionDescription}>No Items in Inventory.</Text></View> : null }
@@ -30,24 +44,23 @@ const InventoryScreen = () => {
         style={styles.scrollView}
         data={list}
         renderItem={( {item} ) => (
-          <View style={styles.inventoryItem}>         
+          <View style={styles.inventoryItem} key={item.id}>         
             <Text><Text style={styles.itemName}>{item.name.toUpperCase()}</Text></Text>
             <Text><Text style={styles.bold}>Quantity: </Text><Text>{item.quantity}</Text></Text>
             <Text><Text style={styles.bold}>Expiration: </Text><Text>{new Date(Date.parse(item.expiration)).toDateString()}</Text></Text>
             <View style={styles.buttonContainer}>
               <TouchableOpacity 
-                onPress={() => console.log('edit')} 
+                onPress={() => console.log(`edit: ${item.id}`)} 
                 style={[styles.halfButton, styles.yellowButton]}>
                   <Text style={styles.bold}>EDIT</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => console.log('delete')}
+                onPress={() => deleteItem(item.id)}
                 style={[styles.halfButton, styles.redButton]}>
                   <Text style={styles.bold}>DELETE</Text>
               </TouchableOpacity>
             </View>
-          </View>)}
-        keyExtractor={item => item.id}>
+          </View>)}>
       </FlatList>
     </SafeAreaView>
   )
