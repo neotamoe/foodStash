@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { styles } from '../styles'
 
-const InventoryScreen = () => {
+const InventoryScreen = ({navigation}) => {
   const [list, setList] = useState([])
 
   const getData = async () => {
@@ -18,10 +18,12 @@ const InventoryScreen = () => {
       console.error(`error getting inventory: ${e}`)
     }
   }
-
   useEffect(() => {
-    getData()
-  }, []); 
+    const unsubscribe = navigation.addListener('focus', () => {
+      getData()
+    })
+    return unsubscribe
+  }, [navigation]); 
 
   const deleteItem = async (id) => {
     try {
@@ -50,7 +52,7 @@ const InventoryScreen = () => {
             <Text><Text style={styles.bold}>Expiration: </Text><Text>{new Date(Date.parse(item.expiration)).toDateString()}</Text></Text>
             <View style={styles.buttonContainer}>
               <TouchableOpacity 
-                onPress={() => console.log(`edit: ${item.id}`)} 
+                onPress={() => navigation.navigate('Edit Item', { itemId: item.id})} 
                 style={[styles.halfButton, styles.yellowButton]}>
                   <Text style={styles.bold}>EDIT</Text>
               </TouchableOpacity>

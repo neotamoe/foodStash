@@ -4,6 +4,7 @@ import React from 'react';
 import HomeScreen from './Screens/HomeScreen';
 import ItemFormScreen from './Screens/ItemFormScreen';
 import InventoryScreen from './Screens/InventoryScreen';
+import EditItemScreen from './Screens/EditItemScreen';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,6 +18,7 @@ const App = () => {
         <Stack.Screen name="Food Stash" component={HomeScreen} />
         <Stack.Screen name="Add Item" component={ItemFormScreen} />
         <Stack.Screen name="Inventory" component={InventoryScreen} />
+        <Stack.Screen name="Edit Item" component={EditItemScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
