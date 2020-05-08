@@ -5,8 +5,8 @@ Whether you're a prepper or a person going through their first pandemic, keep tr
 ## To Do
 - [x] add edit button to inventory list
 - [x] add delete button to inventory list
-- [ ] add ability to sort inventory list
-  - [ ] by expiration date
-  - [ ] by item name
+- [x] add ability to sort inventory list
+  - [x] by expiration date
+  - [x] by item name
 - [ ] option to stay on add screen (maybe a 'save and add another' button)
 - [ ] error handling in UI
