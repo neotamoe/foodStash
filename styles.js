@@ -81,5 +81,12 @@ export const styles = StyleSheet.create({
   yellowButton: {
     backgroundColor: 'gold',
     marginRight: 5
+  },
+  quarterButton: {
+    flex: 4,
+    padding: 5,
+    margin: 5,
+    alignItems: 'center',
+    backgroundColor: 'lightgray'
   }
 });
