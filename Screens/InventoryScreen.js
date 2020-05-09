@@ -1,7 +1,8 @@
-import { SafeAreaView, FlatList, Text, View, TouchableOpacity } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { styles } from '../styles'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const InventoryScreen = ({navigation}) => {
   const [list, setList] = useState([])
