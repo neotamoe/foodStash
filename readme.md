@@ -10,3 +10,5 @@ Whether you're a prepper or a person going through their first pandemic, keep tr
   - [x] by item name
 - [ ] option to stay on add screen (maybe a 'save and add another' button)
 - [ ] error handling in UI
+- [ ] fix stack navigation
+- [x] hide bottom navigation bar

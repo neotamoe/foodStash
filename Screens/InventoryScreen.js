@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { styles } from '../styles'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { hideNavigationBar } from 'react-native-navigation-bar-color';
 
 const InventoryScreen = ({navigation}) => {
   const [list, setList] = useState([])
@@ -54,6 +55,7 @@ const InventoryScreen = ({navigation}) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       getData()
+      hideNavigationBar()
     })
     return unsubscribe
   }, [navigation]);

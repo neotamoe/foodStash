@@ -26,6 +26,9 @@ const ItemFormScreen = ({ navigation }) => {
     }
     storeData()
     console.log(`saving item => itemName: ${itemName}; expirationDate: ${expirationDate}, quantity: ${quantity}`)
+    setItemName()
+    setExpirationDate()
+    setQuantity()
   }
   const showDatepickerUI = () => {
     setShowDatepicker(true);
