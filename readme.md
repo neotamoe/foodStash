@@ -12,5 +12,5 @@ Whether you're a prepper or a person going through their first pandemic, keep tr
 - [ ] error handling in UI
 - [ ] fix/tweak stack navigation?
 - [x] hide bottom navigation bar
-- [ ] revise inventory list so edit/delete on separate screen?
-- [ ] change Button to TouchableOpacity for consistent styling
+- [x] revise inventory list so edit/delete on separate screen?
+- [x] change Button to TouchableOpacity for consistent styling
