@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
     fontSize: 18
   },
   buttonContainer: {
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   halfButton: {
     flex: 2,
@@ -89,8 +89,11 @@ export const styles = StyleSheet.create({
   quarterButton: {
     flex: 4,
     padding: 5,
-    margin: 5,
+    marginRight: 10,
     alignItems: 'center',
     backgroundColor: 'lightgray'
+  },
+  quarterButtonLastChild: {
+    marginRight: 0
   }
 });

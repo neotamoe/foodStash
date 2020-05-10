@@ -86,7 +86,7 @@ const InventoryScreen = ({navigation}) => {
           </View>
         </View> 
         : 
-        <>
+        <View style={styles.scrollView}>
           <View style={styles.buttonContainer}>
             <TouchableOpacity 
               onPress={() => handleSortButton('asc', 'name')} 
@@ -105,12 +105,12 @@ const InventoryScreen = ({navigation}) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => handleSortButton('desc', 'expiration')}
-              style={styles.quarterButton}>
+              style={[styles.quarterButton, styles.quarterButtonLastChild]}>
                 <Text style={styles.bold}>DATE &#9660;</Text>
             </TouchableOpacity>
           </View>
           <FlatList
-            style={styles.scrollView}
+            
             data={list.sort(sortOrder === 'asc' ? sortAsc : sortDesc )}
             renderItem={( {item} ) => (
               <View style={styles.inventoryItem} key={item.id}>         
@@ -131,7 +131,7 @@ const InventoryScreen = ({navigation}) => {
                 </View>
               </View>)}>
           </FlatList>
-        </>
+        </View>
       }
     </SafeAreaView>
   )
