@@ -1,4 +1,4 @@
-import { FlatList, Text, View, TouchableOpacity } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { styles } from '../styles'
@@ -76,51 +76,63 @@ const InventoryScreen = ({navigation}) => {
 
   return (
     <SafeAreaView>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          onPress={() => handleSortButton('asc', 'name')} 
-          style={styles.quarterButton}>
-            <Text style={styles.bold}>&#9650; NAME</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleSortButton('desc', 'name')}
-          style={styles.quarterButton}>
-            <Text style={styles.bold}>NAME &#9660;</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => handleSortButton('asc', 'expiration')} 
-          style={styles.quarterButton}>
-            <Text style={styles.bold}>&#9650; DATE</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleSortButton('desc', 'expiration')}
-          style={styles.quarterButton}>
-            <Text style={styles.bold}>DATE &#9660;</Text>
-        </TouchableOpacity>
-      </View>
-      { list.length === 0 ? <View style={styles.scrollView}><Text style={styles.sectionDescription}>No Items in Inventory.</Text></View> : null }
-      <FlatList
-        style={styles.scrollView}
-        data={list.sort(sortOrder === 'asc' ? sortAsc : sortDesc )}
-        renderItem={( {item} ) => (
-          <View style={styles.inventoryItem} key={item.id}>         
-            <Text><Text style={styles.itemName}>{item.name.toUpperCase()}</Text></Text>
-            <Text><Text style={styles.bold}>Quantity: </Text><Text>{item.quantity}</Text></Text>
-            <Text><Text style={styles.bold}>Expiration: </Text><Text>{new Date(Date.parse(item.expiration)).toDateString()}</Text></Text>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity 
-                onPress={() => navigation.navigate('Edit Item', { itemId: item.id})} 
-                style={[styles.halfButton, styles.yellowButton]}>
-                  <Text style={styles.bold}>EDIT</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => deleteItem(item.id)}
-                style={[styles.halfButton, styles.redButton]}>
-                  <Text style={styles.bold}>DELETE</Text>
-              </TouchableOpacity>
-            </View>
-          </View>)}>
-      </FlatList>
+      { list.length === 0 ? 
+        <View style={styles.scrollView}>
+          <Text style={styles.sectionDescription}>
+            No Items in Inventory.
+          </Text>
+          <View style={styles.sectionContainer}>
+            <Button onPress={() => navigation.navigate('Add Item')} title="Add Item" />
+          </View>
+        </View> 
+        : 
+        <>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity 
+              onPress={() => handleSortButton('asc', 'name')} 
+              style={styles.quarterButton}>
+                <Text style={styles.bold}>&#9650; NAME</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleSortButton('desc', 'name')}
+              style={styles.quarterButton}>
+                <Text style={styles.bold}>NAME &#9660;</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={() => handleSortButton('asc', 'expiration')} 
+              style={styles.quarterButton}>
+                <Text style={styles.bold}>&#9650; DATE</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleSortButton('desc', 'expiration')}
+              style={styles.quarterButton}>
+                <Text style={styles.bold}>DATE &#9660;</Text>
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            style={styles.scrollView}
+            data={list.sort(sortOrder === 'asc' ? sortAsc : sortDesc )}
+            renderItem={( {item} ) => (
+              <View style={styles.inventoryItem} key={item.id}>         
+                <Text><Text style={styles.itemName}>{item.name.toUpperCase()}</Text></Text>
+                <Text><Text style={styles.bold}>Quantity: </Text><Text>{item.quantity}</Text></Text>
+                <Text><Text style={styles.bold}>Expiration: </Text><Text>{new Date(Date.parse(item.expiration)).toDateString()}</Text></Text>
+                <View style={styles.buttonContainer}>
+                  <TouchableOpacity 
+                    onPress={() => navigation.navigate('Edit Item', { itemId: item.id})} 
+                    style={[styles.halfButton, styles.yellowButton]}>
+                      <Text style={styles.bold}>EDIT</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => deleteItem(item.id)}
+                    style={[styles.halfButton, styles.redButton]}>
+                      <Text style={styles.bold}>DELETE</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>)}>
+          </FlatList>
+        </>
+      }
     </SafeAreaView>
   )
 }

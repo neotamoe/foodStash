@@ -14,6 +14,8 @@ const ItemFormScreen = ({ navigation }) => {
   const [showDatepicker, setShowDatepicker] = useState(false)
   const [showError, setShowError] = useState(false)
   const [error, setError] = useState("All fields must have a value.")
+  const [showMessage, setShowMessage] = useState(false)
+  const [message, setMessage] = useState("Item added to inventory.")
 
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || expirationDate;
@@ -21,8 +23,10 @@ const ItemFormScreen = ({ navigation }) => {
     setExpirationDate(currentDate);
   };
   const saveItem = () => {
+    setShowMessage(false)
+    setShowError(false)
     if(!checkFormFields()){ 
-      setShowError(true) 
+      return setShowError(true) 
     }
     storeData()
     console.log(`saving item => itemName: ${itemName}; expirationDate: ${expirationDate}, quantity: ${quantity}`)
@@ -54,7 +58,7 @@ const ItemFormScreen = ({ navigation }) => {
         currentInventory.push(item)
       }
       await AsyncStorage.setItem('inventory', JSON.stringify(currentInventory))
-      navigation.navigate('Inventory')
+      setShowMessage(true)
     } catch (e) {
       console.error(`error saving data: ${e}`)
     }
@@ -62,7 +66,7 @@ const ItemFormScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <ScrollView style={styles.scrollView}>
+      <View style={styles.scrollView}>
         <Text style={styles.formText}>Item</Text>
         <TextInput
           style={styles.basicInput}
@@ -96,8 +100,20 @@ const ItemFormScreen = ({ navigation }) => {
             color="green"
             accessibilityLabel="add item to inventory" 
           />
+          { showMessage ?
+            <Text style={styles.messageText}>{message}</Text>
+            : null
+          }
         </View>
-      </ScrollView>
+        <View style={styles.sectionContainer}>
+          <Button 
+            title="Go to Inventory"
+            onPress={() => navigation.navigate('Inventory')}
+            color="gold"
+            accessibilityLabel="go to inventory" 
+          />
+        </View>
+      </View>
     </SafeAreaView>
   )
 }

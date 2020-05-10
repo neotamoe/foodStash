@@ -50,6 +50,10 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10
   },
+  messageText: {
+    fontWeight: 'bold',
+    marginTop: 10
+  },
   bold: {
     fontWeight: 'bold'
   },
