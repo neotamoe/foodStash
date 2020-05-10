@@ -12,11 +12,11 @@ const ItemFormScreen = ({ navigation }) => {
   const [ itemName, setItemName ] = useState()
   const [ expirationDate, setExpirationDate ] = useState()
   const [ quantity, setQuantity ] = useState()
-  const [showDatepicker, setShowDatepicker] = useState(false)
-  const [showError, setShowError] = useState(false)
-  const [error, setError] = useState("All fields must have a value.")
-  const [showMessage, setShowMessage] = useState(false)
-  const [message, setMessage] = useState("Item added to inventory.")
+  const [ showDatepicker, setShowDatepicker ] = useState(false)
+  const [ showError, setShowError ] = useState(false)
+  const [ error, setError ] = useState("All fields must have a value.")
+  const [ showMessage, setShowMessage ] = useState(false)
+  const [ message, setMessage ] = useState("Item added to inventory.")
 
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || expirationDate;
@@ -79,60 +79,62 @@ const ItemFormScreen = ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-    <SafeAreaView>
-      <ScrollView>
-      <View style={styles.scrollView}>
-        <Text style={styles.formText}>Item</Text>
-        <TextInput
-          style={styles.basicInput}
-          value={itemName}
-          onChangeText={itemName => setItemName(itemName)}
-        />
-        <Text style={styles.formText}>Quantity</Text>
-        <TextInput
-          style={styles.basicInput}
-          value={quantity}
-          onChangeText={quantity => setQuantity(quantity)}        />
-        <Text style={styles.formText}>Expiration Date: {expirationDate ? expirationDate.toDateString() : null}</Text>
-        { showDatepicker && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={expirationDate ? expirationDate : new Date()}
-            mode="date"
-            display="default"
-            onChange={onDateChange}
-          />
-        )}
-        <TouchableOpacity 
-          onPress={showDatepickerUI}
-          style={styles.baseButton}>
-          <Text style={[styles.baseButtonText, styles.bold]}>CHOOSE DATE</Text>
-        </TouchableOpacity>
-        <View style={styles.sectionContainer}>
-          { showError ?
-            <Text style={styles.errorText}>{error}</Text>
-            : null
-          }
-          <TouchableOpacity 
-            onPress={saveItem}
-            style={[styles.baseButton, {backgroundColor: 'green'}]}>
-            <Text style={[styles.baseButtonText, styles.bold]}>ADD TO INVENTORY</Text>
-          </TouchableOpacity>
-          { showMessage ?
-            <Text style={styles.messageText}>{message}</Text>
-            : null
-          }
-        </View>
-        <View style={styles.sectionContainer}>
-          <TouchableOpacity 
-            style={[styles.baseButton, {backgroundColor: 'gold'}]}
-            onPress={() => navigation.navigate('Inventory')}>
-            <Text style={[styles.baseButtonText, styles.bold]}>GO TO INVENTORY</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      </ScrollView>
-    </SafeAreaView>
+      <SafeAreaView>
+        <ScrollView>
+          <View style={styles.scrollView}>
+            <Text style={styles.formText}>Item</Text>
+            <TextInput
+              style={styles.basicInput}
+              value={itemName}
+              onChangeText={itemName => setItemName(itemName)}
+            />
+            <Text style={styles.formText}>Quantity</Text>
+            <TextInput
+              style={styles.basicInput}
+              value={quantity}
+              onChangeText={quantity => setQuantity(quantity)}        />
+            <Text style={styles.formText}>Expiration Date: {expirationDate ? expirationDate.toDateString() : null}</Text>
+            { showDatepicker && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={expirationDate ? expirationDate : new Date()}
+                mode="date"
+                display="default"
+                onChange={onDateChange}
+              />
+            )}
+            <TouchableOpacity 
+              onPress={showDatepickerUI}
+              style={styles.baseButton}>
+              <Text style={[styles.baseButtonText, styles.bold]}>CHOOSE DATE</Text>
+            </TouchableOpacity>
+            <View style={styles.sectionContainer}>
+              { showError ?
+                <Text style={styles.errorText}>{error}</Text>
+                : null
+              }
+              <TouchableOpacity 
+                onPress={saveItem}
+                style={[styles.baseButton, {backgroundColor: 'green'}]}>
+                <Text style={[styles.baseButtonText, styles.bold]}>ADD TO INVENTORY</Text>
+              </TouchableOpacity>
+              { showMessage ?
+                <Text style={styles.messageText}>{message}</Text>
+                : null
+              }
+            </View>
+            <View style={styles.sectionContainer}>
+              <TouchableOpacity 
+                style={[styles.baseButton, {backgroundColor: 'gold'}]}
+                onPress={() => navigation.navigate('Inventory')}>
+                <Text style={[styles.baseButtonText, styles.bold]}>
+                  GO TO INVENTORY
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   )
 }

@@ -6,9 +6,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { hideNavigationBar } from 'react-native-navigation-bar-color';
 
 const InventoryScreen = ({navigation}) => {
-  const [list, setList] = useState([])
-  const [sortByProperty, setSortByProperty] = useState('expiration')
-  const [sortOrder, setSortOrder] = useState('asc')
+  const [ list, setList ] = useState([])
+  const [ sortByProperty, setSortByProperty ] = useState('expiration')
+  const [ sortOrder, setSortOrder ] = useState('asc')
 
   const getData = async () => {
     try {

@@ -4,7 +4,6 @@ import { styles } from '../styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-community/async-storage';
 import 'react-native-get-random-values'
-import { v4 as uuidv4 } from 'uuid';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const EditItemScreen = ({ route, navigation }) => {
@@ -12,10 +11,10 @@ const EditItemScreen = ({ route, navigation }) => {
   const [ itemName, setItemName ] = useState()
   const [ expirationDate, setExpirationDate ] = useState()
   const [ quantity, setQuantity ] = useState()
-  const [showDatepicker, setShowDatepicker] = useState(false)
-  const [showError, setShowError] = useState(false)
-  const [error, setError] = useState("All fields must have a value.")
-  const [indexToEdit, setIndexToEdit] = useState()
+  const [ showDatepicker, setShowDatepicker ] = useState(false)
+  const [ showError, setShowError ] = useState(false)
+  const [ error, setError ] = useState("All fields must have a value.")
+  const [ indexToEdit, setIndexToEdit ] = useState()
   const [ listObject, setListObject ] = useState()
 
   const getItem = async () => {

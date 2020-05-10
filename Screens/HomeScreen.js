@@ -23,14 +23,18 @@ const HomeScreen = ({ navigation }) => {
             <TouchableOpacity 
               onPress={() => navigation.navigate('Inventory')}
               style={styles.baseButton}>
-              <Text style={[styles.bold, styles.baseButtonText]}>VIEW INVENTORY</Text>
+              <Text style={[styles.bold, styles.baseButtonText]}>
+                VIEW INVENTORY
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.sectionContainer}>
             <TouchableOpacity 
               onPress={() => navigation.navigate('Add Item')}
               style={styles.baseButton}>
-            <Text style={[styles.bold, styles.baseButtonText]}>ADD ITEM</Text>
+              <Text style={[styles.bold, styles.baseButtonText]}>
+                ADD ITEM
+              </Text>
             </TouchableOpacity>            
           </View>
         </ScrollView>
