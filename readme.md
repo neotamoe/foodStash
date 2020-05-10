@@ -8,7 +8,7 @@ Whether you're a prepper or a person going through their first pandemic, keep tr
 - [x] add ability to sort inventory list
   - [x] by expiration date
   - [x] by item name
-- [ ] option to stay on add screen (maybe a 'save and add another' button)
+- [x] option to stay on add screen (stopped auto-redirect; add go to inventory button instead)
 - [ ] error handling in UI
-- [ ] fix stack navigation
+- [ ] fix stack navigation?
 - [x] hide bottom navigation bar
