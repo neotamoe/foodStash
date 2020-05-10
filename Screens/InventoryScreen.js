@@ -59,20 +59,6 @@ const InventoryScreen = ({navigation}) => {
     })
     return unsubscribe
   }, [navigation]);
-  
-  const deleteItem = async (id) => {
-    try {
-      const storedList = await AsyncStorage.getItem('inventory')
-      const listObject = JSON.parse(storedList)
-      console.log(`inventory list object: ${JSON.stringify(listObject)}`)
-      const remainingItems = listObject.filter((item) => item.id !== id)
-      console.log(remainingItems)
-      await AsyncStorage.setItem('inventory', JSON.stringify(remainingItems))
-      setList(remainingItems)
-    } catch(e) {
-      console.error(`error getting inventory: ${e}`)
-    }
-  }
 
   return (
     <SafeAreaView>
@@ -90,46 +76,34 @@ const InventoryScreen = ({navigation}) => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity 
               onPress={() => handleSortButton('asc', 'name')} 
-              style={styles.quarterButton}>
-                <Text style={styles.bold}>&#9650; NAME</Text>
+              style={[styles.quarterButton, styles.baseButton]}>
+                <Text style={[styles.bold, styles.baseButtonText]}>&#9650; NAME</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => handleSortButton('desc', 'name')}
-              style={styles.quarterButton}>
-                <Text style={styles.bold}>NAME &#9660;</Text>
+              style={[styles.quarterButton, styles.baseButton]}>
+                <Text style={[styles.bold, styles.baseButtonText]}>NAME &#9660;</Text>
             </TouchableOpacity>
             <TouchableOpacity 
               onPress={() => handleSortButton('asc', 'expiration')} 
-              style={styles.quarterButton}>
-                <Text style={styles.bold}>&#9650; DATE</Text>
+              style={[styles.quarterButton, styles.baseButton]}>
+                <Text style={[styles.bold, styles.baseButtonText]}>&#9650; DATE</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => handleSortButton('desc', 'expiration')}
-              style={[styles.quarterButton, styles.quarterButtonLastChild]}>
-                <Text style={styles.bold}>DATE &#9660;</Text>
+              style={[styles.quarterButton, styles.baseButton, styles.quarterButtonLastChild]}>
+                <Text style={[styles.bold, styles.baseButtonText]}>DATE &#9660;</Text>
             </TouchableOpacity>
           </View>
           <FlatList
-            
+            style={[styles.inventoryListContainer, styles.topBorder]}
             data={list.sort(sortOrder === 'asc' ? sortAsc : sortDesc )}
             renderItem={( {item} ) => (
-              <View style={styles.inventoryItem} key={item.id}>         
+              <TouchableOpacity style={styles.inventoryItem} key={item.id} onPress={() => navigation.navigate('Edit Item', { itemId: item.id})}>         
                 <Text><Text style={styles.itemName}>{item.name.toUpperCase()}</Text></Text>
                 <Text><Text style={styles.bold}>Quantity: </Text><Text>{item.quantity}</Text></Text>
                 <Text><Text style={styles.bold}>Expiration: </Text><Text>{new Date(Date.parse(item.expiration)).toDateString()}</Text></Text>
-                <View style={styles.buttonContainer}>
-                  <TouchableOpacity 
-                    onPress={() => navigation.navigate('Edit Item', { itemId: item.id})} 
-                    style={[styles.halfButton, styles.yellowButton]}>
-                      <Text style={styles.bold}>EDIT</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => deleteItem(item.id)}
-                    style={[styles.halfButton, styles.redButton]}>
-                      <Text style={styles.bold}>DELETE</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>)}>
+              </TouchableOpacity>)}>
           </FlatList>
         </View>
       }

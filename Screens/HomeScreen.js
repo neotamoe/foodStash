@@ -4,7 +4,8 @@ import {
   ScrollView,
   View,
   StatusBar,
-  Button
+  TouchableOpacity,
+  Text
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -19,16 +20,18 @@ const HomeScreen = ({ navigation }) => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
           <View style={styles.sectionContainer}>
-            <Button 
-              title="View Inventory"
-              onPress={() => navigation.navigate('Inventory')}  
-            />
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('Inventory')}
+              style={styles.baseButton}>
+              <Text style={[styles.bold, styles.baseButtonText]}>VIEW INVENTORY</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.sectionContainer}>
-            <Button 
-              title="Add Item"
-              onPress={() => navigation.navigate('Add Item')}  
-            />
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('Add Item')}
+              style={styles.baseButton}>
+            <Text style={[styles.bold, styles.baseButtonText]}>ADD ITEM</Text>
+            </TouchableOpacity>            
           </View>
         </ScrollView>
       </SafeAreaView>

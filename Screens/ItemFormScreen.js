@@ -1,5 +1,5 @@
-import { ScrollView, Text, TextInput, View, Button } from 'react-native';
-import React, { useState } from 'react';
+import { Text, TextInput, View, ScrollView, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { styles } from '../styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -25,6 +25,7 @@ const ItemFormScreen = ({ navigation }) => {
   };
   const saveItem = () => {
     hideNavigationBar()
+    Keyboard.dismiss()
     setShowMessage(false)
     setShowError(false)
     if(!checkFormFields()){ 
@@ -37,6 +38,7 @@ const ItemFormScreen = ({ navigation }) => {
     setQuantity()
   }
   const showDatepickerUI = () => {
+    Keyboard.dismiss()
     setShowDatepicker(true);
   };
 
@@ -66,8 +68,19 @@ const ItemFormScreen = ({ navigation }) => {
     }
   }
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setShowError(false)
+      setShowMessage(false)
+      hideNavigationBar()
+    })
+    return unsubscribe
+  }, [navigation]);
+
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <SafeAreaView>
+      <ScrollView>
       <View style={styles.scrollView}>
         <Text style={styles.formText}>Item</Text>
         <TextInput
@@ -90,33 +103,37 @@ const ItemFormScreen = ({ navigation }) => {
             onChange={onDateChange}
           />
         )}
-        <Button onPress={showDatepickerUI} title="Choose Date" />
+        <TouchableOpacity 
+          onPress={showDatepickerUI}
+          style={styles.baseButton}>
+          <Text style={[styles.baseButtonText, styles.bold]}>CHOOSE DATE</Text>
+        </TouchableOpacity>
         <View style={styles.sectionContainer}>
           { showError ?
             <Text style={styles.errorText}>{error}</Text>
             : null
           }
-          <Button 
-            title="Add to Inventory"
+          <TouchableOpacity 
             onPress={saveItem}
-            color="green"
-            accessibilityLabel="add item to inventory" 
-          />
+            style={[styles.baseButton, {backgroundColor: 'green'}]}>
+            <Text style={[styles.baseButtonText, styles.bold]}>ADD TO INVENTORY</Text>
+          </TouchableOpacity>
           { showMessage ?
             <Text style={styles.messageText}>{message}</Text>
             : null
           }
         </View>
         <View style={styles.sectionContainer}>
-          <Button 
-            title="Go to Inventory"
-            onPress={() => navigation.navigate('Inventory')}
-            color="gold"
-            accessibilityLabel="go to inventory" 
-          />
+          <TouchableOpacity 
+            style={[styles.baseButton, {backgroundColor: 'gold'}]}
+            onPress={() => navigation.navigate('Inventory')}>
+            <Text style={[styles.baseButtonText, styles.bold]}>GO TO INVENTORY</Text>
+          </TouchableOpacity>
         </View>
       </View>
+      </ScrollView>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   )
 }
 

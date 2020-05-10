@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     margin: 10,
   },
   sectionContainer: {
-    marginTop: 32,
+    marginTop: 32
   },
   sectionTitle: {
     fontSize: 24,
@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
   },
   halfButton: {
     flex: 2,
-    padding: 5,
+    padding: 10,
     marginTop: 5,
     marginBottom: 5,
     alignItems: 'center',
@@ -90,10 +90,26 @@ export const styles = StyleSheet.create({
     flex: 4,
     padding: 5,
     marginRight: 10,
-    alignItems: 'center',
-    backgroundColor: 'lightgray'
+    alignItems: 'center'
   },
   quarterButtonLastChild: {
     marginRight: 0
+  },
+  inventoryListContainer: {
+    marginTop: 15
+  },
+  topBorder: {
+    borderColor: 'darkgray',
+    borderTopWidth: 2
+  },
+  baseButton: {
+    textAlign: 'center',
+    backgroundColor: 'purple',
+    padding: 10,
+    color: 'white',
+    alignItems: 'center'
+  },
+  baseButtonText: {
+    color: 'white'
   }
 });

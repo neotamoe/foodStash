@@ -1,4 +1,4 @@
-import { ScrollView, Text, TextInput, View, Button } from 'react-native';
+import { ScrollView, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { styles } from '../styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -37,8 +37,8 @@ const EditItemScreen = ({ route, navigation }) => {
 
   const saveEditedItem = async () => {
     try {
-      // const storedList = await AsyncStorage.getItem('inventory')
-      // const listObject = JSON.parse(storedList)
+      const storedList = await AsyncStorage.getItem('inventory')
+      const listObject = JSON.parse(storedList)
       const revisedItem = {
         id: itemId,
         name: itemName,
@@ -80,6 +80,20 @@ const EditItemScreen = ({ route, navigation }) => {
     return (itemName !== undefined && expirationDate !== undefined && quantity !== undefined)
   }
 
+  const deleteItem = async (id) => {
+    try {
+      const storedList = await AsyncStorage.getItem('inventory')
+      const listObject = JSON.parse(storedList)
+      console.log(`inventory list object: ${JSON.stringify(listObject)}`)
+      const remainingItems = listObject.filter((item) => item.id !== id)
+      console.log(remainingItems)
+      await AsyncStorage.setItem('inventory', JSON.stringify(remainingItems))
+      navigation.navigate('Inventory')
+    } catch(e) {
+      console.error(`error getting inventory: ${e}`)
+    }
+  }
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollView}>
@@ -104,26 +118,33 @@ const EditItemScreen = ({ route, navigation }) => {
             onChange={onDateChange}
           />
         )}
-        <Button onPress={showDatepickerUI} title="Change Date" />
+        <TouchableOpacity 
+          onPress={showDatepickerUI}
+          style={styles.baseButton}>
+          <Text style={[styles.baseButtonText, styles.bold]}>CHANGE DATE</Text>
+        </TouchableOpacity>
         <View style={styles.sectionContainer}>
           { showError ?
             <Text style={styles.errorText}>{error}</Text>
             : null
           }
-          <Button 
-            title="Save Changes"
+          <TouchableOpacity 
             onPress={saveItem}
-            color="green"
-            accessibilityLabel="add item to inventory" 
-          />
+            style={[styles.baseButton, {backgroundColor: 'green'}]}>
+            <Text style={[styles.baseButtonText, styles.bold]}>SAVE CHANGES</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.sectionContainer}>
-          <Button 
-            title="Cancel"
-            onPress={() => { navigation.navigate('Inventory')}}
-            color="gold"
-            accessibilityLabel="cancel" 
-          />
+        <View style={[styles.buttonContainer, styles.sectionContainer]}>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate('Inventory')} 
+            style={[styles.halfButton, styles.yellowButton]}>
+              <Text style={[styles.bold, styles.baseButtonText]}>CANCEL</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => deleteItem(item.id)}
+            style={[styles.halfButton, styles.redButton]}>
+              <Text style={[styles.bold, styles.baseButtonText]}>DELETE</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>

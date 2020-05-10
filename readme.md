@@ -10,5 +10,7 @@ Whether you're a prepper or a person going through their first pandemic, keep tr
   - [x] by item name
 - [x] option to stay on add screen (stopped auto-redirect; add go to inventory button instead)
 - [ ] error handling in UI
-- [ ] fix stack navigation?
+- [ ] fix/tweak stack navigation?
 - [x] hide bottom navigation bar
+- [ ] revise inventory list so edit/delete on separate screen?
+- [ ] change Button to TouchableOpacity for consistent styling
