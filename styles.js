@@ -8,7 +8,7 @@ import {
 
 export const styles = StyleSheet.create({
   scrollView: {
-    margin: 10,
+    margin: 10
   },
   sectionContainer: {
     marginTop: 32
@@ -80,11 +80,11 @@ export const styles = StyleSheet.create({
   },
   redButton: {
     backgroundColor: 'tomato',
-    marginLeft: 5,
+    marginRight: 5,
   },
   yellowButton: {
     backgroundColor: 'gold',
-    marginRight: 5
+    marginLeft: 5
   },
   quarterButton: {
     flex: 4,

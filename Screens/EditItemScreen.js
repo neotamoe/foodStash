@@ -122,6 +122,13 @@ const EditItemScreen = ({ route, navigation }) => {
           style={styles.baseButton}>
           <Text style={[styles.baseButtonText, styles.bold]}>CHANGE DATE</Text>
         </TouchableOpacity>
+        <View
+          style={{
+            borderBottomColor: 'lightgray',
+            borderBottomWidth: 1,
+            marginTop: 40
+          }}
+        />
         <View style={styles.sectionContainer}>
           { showError ?
             <Text style={styles.errorText}>{error}</Text>
@@ -134,15 +141,15 @@ const EditItemScreen = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={[styles.buttonContainer, styles.sectionContainer]}>
-          <TouchableOpacity 
-            onPress={() => navigation.navigate('Inventory')} 
-            style={[styles.halfButton, styles.yellowButton]}>
-              <Text style={[styles.bold, styles.baseButtonText]}>CANCEL</Text>
-          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => deleteItem(item.id)}
             style={[styles.halfButton, styles.redButton]}>
               <Text style={[styles.bold, styles.baseButtonText]}>DELETE</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            onPress={() => navigation.navigate('Inventory')} 
+            style={[styles.halfButton, styles.yellowButton]}>
+              <Text style={[styles.bold, styles.baseButtonText]}>CANCEL</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
